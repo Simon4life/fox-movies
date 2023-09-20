@@ -6,7 +6,7 @@ import axios from "axios";
 
 const SingleMovie = () => {
   const mainURL = `https://api.themoviedb.org/3/movie/`;
-  const singleMovieUrl = `?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
+  const singleMovieUrl = `?language=en-US`;
 
   const { id } = useParams();
   const [movie, setMovie] = useState({});
@@ -17,7 +17,7 @@ const SingleMovie = () => {
 
   const fetchRecomendations = async (id) => {
     const response = await axios(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${id}/recommendations`
     );
     const { results } = response.data;
     setRecommendations(results);
@@ -132,6 +132,7 @@ const SingleMovie = () => {
       <section className="recommendations">
         <h3>More Movies like {original_title}</h3>
         <div className="movies-container">
+
           {recommendations.map((item, index) => {
             const { poster_path, id } = item;
             return (
@@ -147,6 +148,7 @@ const SingleMovie = () => {
               </div>
             );
           })}
+          
         </div>
       </section>
       <Footer />
