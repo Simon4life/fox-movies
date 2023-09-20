@@ -1,6 +1,7 @@
-import React, { useContext, useReducer, useState, useEffect } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import reducer from "./reducer";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AppContext = React.createContext();
 
@@ -14,12 +15,16 @@ const defaultState = {
   searchResult: [],
   movie: {},
   watchList: JSON.parse(localStorage.getItem("watchlist")) || [],
+  isAlertVisible: true,
+  alertMsg: ""
 };
 
 
 // set auth headers
 axios.defaults.headers.common['Authorization'] = import.meta.env.VITE_AUTH_TOKEN
 
+
+// app provider
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
@@ -141,6 +146,11 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "REMOVE_WATCHLIST", payload: id });
   };
 
+  const notify = (type, message) => {
+    toast[type](message)
+  }
+
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -159,6 +169,7 @@ const AppProvider = ({ children }) => {
         fetchSingleMovie,
         addToWatchList,
         removeFromWatchList,
+        notify
       }}
     >
       {children}

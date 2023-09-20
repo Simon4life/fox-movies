@@ -2,6 +2,7 @@ import React from "react";
 import { MovieList } from "../components";
 import { useContextGlobal } from "../context/context";
 import { useParams } from "react-router-dom";
+
 const AllMovies = () => {
   const { movies, IMG_PATH } = useContextGlobal();
   const { section } = useParams();

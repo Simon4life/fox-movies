@@ -5,7 +5,6 @@ import { useContextGlobal } from "../context/context";
 import axios from "axios";
 
 const SingleMovie = () => {
-  console.log(process.env.API_KEY);
   const mainURL = `https://api.themoviedb.org/3/movie/`;
   const singleMovieUrl = `?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
 
@@ -15,6 +14,7 @@ const SingleMovie = () => {
   const [loading, setLoading] = useState(true);
   const [pageId, setPageId] = useState(id);
   const [recommendations, setRecommendations] = useState([]);
+
   const fetchRecomendations = async (id) => {
     const response = await axios(
       `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
@@ -22,6 +22,7 @@ const SingleMovie = () => {
     const { results } = response.data;
     setRecommendations(results);
   };
+
   useEffect(() => {
     const fetchSingleMovie = async (id) => {
       const response = await axios(`${mainURL}${id}${singleMovieUrl}`);
@@ -55,6 +56,7 @@ const SingleMovie = () => {
     fetchSingleMovie(id);
     fetchRecomendations(id);
   }, [pageId]);
+
   if (loading) {
     return (
       <section className="section">
@@ -62,6 +64,7 @@ const SingleMovie = () => {
       </section>
     );
   }
+  
   if (!movie) {
     return (
       <div className="section">

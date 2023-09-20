@@ -78,6 +78,12 @@ const reducer = (state, action) => {
       watchList: newList,
     };
   }
+  if(action.type == "SHOW_ALERT") {
+    return {...state, isAlertVisible: true, alertMsg: action.payload}
+  }
+  if(action.type == "CLOSE_ALERT") {
+    return {...state, isAlertVisible: false, alertMsg: ""}
+  }
   return {};
 };
 export default reducer;

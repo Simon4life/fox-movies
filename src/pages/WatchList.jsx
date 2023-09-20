@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useContextGlobal } from "../context/context";
-import { Button, Snackbar } from "@mui/material";
+
 
 const WatchList = () => {
 
-  const { watchList, IMG_PATH, removeFromWatchList } = useContextGlobal();
-
-  useEffect(() => {
-    console.log(watchList);
-  }, [watchList]);
+  const { watchList, IMG_PATH, removeFromWatchList, notify } = useContextGlobal();
 
   if (watchList.length < 1) {
     return (
@@ -23,9 +19,9 @@ const WatchList = () => {
       </div>
     );
   }
+  
   return (
     <section className="section">
-      
       <div className="watchlist-container section-center">
         <h3>{`You have ${watchList.length} items in your watchlist`}</h3>
         {watchList.map((item, index) => {
@@ -49,7 +45,10 @@ const WatchList = () => {
                 <p>Vote average: {vote_average.toFixed(1)}</p>
                 <button
                   className="btn watchlist-remove-btn"
-                  onClick={() => removeFromWatchList(id)}
+                  onClick={() => {
+                    removeFromWatchList(id)
+                    notify("warn", `${original_title} has been removed from watchlist`)
+                  }}
                 >
                   remove
                 </button>

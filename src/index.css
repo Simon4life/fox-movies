@@ -179,17 +179,6 @@ p {
   cursor: pointer;
 }
 
-/* Navbar */
-nav {
-  width: 100%;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* hero */
 .hero {
   width: 100vw;
@@ -397,6 +386,7 @@ Movies
   align-items: center;
   font-size: 1.2rem;
   color: var(--clr-primary-5);
+  font-weight: bold;
 }
 
 .card-container {

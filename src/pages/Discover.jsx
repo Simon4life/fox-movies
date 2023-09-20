@@ -13,18 +13,23 @@ const Discover = () => {
     getMoviesByGenre,
     moviesByGenre,
   } = useContextGlobal();
+
   const [loading, setLoading] = useState(true);
   const genreId = useGenre(selectedGenre);
+
   const genreUrl = `https://api.themoviedb.org/3/genre/movie/list?language=en-US`;
+
   useEffect(() => {
     const genreInit = async () => {
       await fetchGenres(genreUrl).then(() => setLoading(false));
     };
     genreInit();
   }, []);
+
   useEffect(() => {
     getMoviesByGenre(genreId);
   }, [genres]);
+  
   return (
     <section className="section">
       <header className="discover-header">

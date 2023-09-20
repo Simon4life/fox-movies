@@ -1,17 +1,17 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { AiFillStar } from "react-icons/ai";
 import { useContextGlobal } from "../context/context";
+
+
 const MovieList = ({
   id,
   title,
   original_title,
-  vote_average,
   poster_path,
   IMG_PATH,
 }) => {
-  const { addToWatchList } = useContextGlobal();
+  const { addToWatchList, notify } = useContextGlobal();
 
   return (
     <div className="movie" key={id}>
@@ -29,7 +29,7 @@ const MovieList = ({
             className="btn watchlist-btn"
             onClick={() => {
               addToWatchList(id);
-              console.log("hello");
+              notify("info", `${original_title} Added to watchlist`)
             }}
           >
             <FiPlus style={{ fontSize: "1.2rem", fontWeight: "bold" }} />

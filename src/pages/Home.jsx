@@ -1,5 +1,4 @@
 import React from "react";
-import { Alert } from "@mui/material";
 import {
   Header,
   TrendingMovies,
@@ -9,6 +8,7 @@ import {
   Navigations,
   Footer,
 } from "../components";
+
 const Home = () => {
   return (
     <main>
